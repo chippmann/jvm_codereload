@@ -17,7 +17,7 @@ Repeat the following as many times as you need to test the reloading:
 
 
 ## project structure:
-`application`: the dummy application which uses reloaded code
-`classloader`: custom classloader impls which enable code reloading
-`library`: library conaining a base class from which reloaded code extends
-`reloading`: the code which gets reloaded by `application` through `classloader` and implements the base class from `library`
+- `application`: the dummy application which uses reloaded code
+- `classloader`: custom classloader impls which enable code reloading
+- `library`: library conaining a base class from which reloaded code extends
+- `reloading`: the code which gets reloaded by `application` through `classloader` and implements the base class from `library`
