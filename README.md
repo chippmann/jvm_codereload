@@ -14,3 +14,10 @@ Repeat the following as many times as you need to test the reloading:
 - Change the property `change` inside [godot.reloading.Entry](reloading/src/main/kotlin/godot/reloading/Entry.kt)
 - `./gradlew :reloading:build`
 - hit ENTER in terminal
+
+
+## project structure:
+`application`: the dummy application which uses reloaded code
+`classloader`: custom classloader impls which enable code reloading
+`library`: library conaining a base class from which reloaded code extends
+`reloading`: the code which gets reloaded by `application` through `classloader` and implements the base class from `library`
