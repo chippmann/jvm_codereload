@@ -1,9 +1,6 @@
 package godot.application
 
-import godot.CustomUrlClassLoader
 import godot.Entry
-import godot.ProxyClassloader
-import java.io.File
 
 fun main(args: Array<String>) {
     var running = true
@@ -11,15 +8,12 @@ fun main(args: Array<String>) {
     while (running) {
         try {
             println("-----------------------------------------")
-            info("Setting new classloader proxy with jar path: ${args[0]}")
-            (ClassLoader.getSystemClassLoader() as ProxyClassloader).proxy = CustomUrlClassLoader(
-                arrayOf(
-                    File(args[0]).toURL()
-                ),
-                ClassLoader.getSystemClassLoader()
-            )
 
-            val entryFile = ClassLoader.getSystemClassLoader().loadClass("godot.reloading.Entry").getDeclaredConstructor().newInstance()
+            // START: testing variants:
+//            val entryFile = getEntryFileThroughCustomSystemClassloader(args[0]) // SystemClassloader
+            val entryFile = getEntryFileThroughReplacedUrlClassloader(args[0]) //replaced urlClassloader
+            // END: testing variants:
+
             info("Entry file instance: $entryFile still extends ${Entry::class.qualifiedName} from the classloader perspective: ${entryFile is Entry}")
 
             if (entryFile is Entry) {
